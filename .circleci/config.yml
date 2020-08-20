@@ -1,0 +1,19 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.0.0
+
+jobs:
+  test:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run lint:ci
+      - run: npm run prettier:ci
+      - run: npm run test:ci
+
+workflows:
+  tests:
+    jobs:
+      - test
